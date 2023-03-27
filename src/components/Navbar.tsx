@@ -1,23 +1,19 @@
 import ReorderIcon from '@mui/icons-material/Reorder';
 import SortIcon from '@mui/icons-material/Sort';
 import SearchIcon from '@mui/icons-material/Search';
-// todo create navbar components 
 
-const Navbar = () => {
-    // todo search bar
+interface props {
+    setShowNavbar: Function;
+}
 
-    //todo icon
-
-    //todo side nav bar 
-
-    //todo ??
+const Navbar = ({setShowNavbar}: props) => {
     return (
-        <div className="h-[5vh] items-center grid grid-cols-[10%,80%,10%]">
+        <div className="h-[5vh] items-center grid grid-cols-[10%,80%,10%] fixed w-full bg-white">
             <div className='ml-3 flex items-center'>
-                <div>
+                <div className='cursor-pointer' onClick={()=>{setShowNavbar()}}>
                     <ReorderIcon />
                 </div>
-                <div className='ml-1'>
+                <div className='ml-1 cursor-pointer'>
                     GooDo
                 </div>
             </div>
