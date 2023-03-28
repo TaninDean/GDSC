@@ -6,13 +6,15 @@ interface props {
 }
 
 const ActivitySelection = ({ icon, name }: props) => {
+    const currentUrl = window.location.pathname
+    
     return (
-        <div className='gap-3'>
+        <a href={`${name.toLowerCase().split(' ')[0]}`} className={`gap-3 ${currentUrl.includes(name.toLowerCase().split(' ')[0]) && 'bg-[#EBEBEB]'}`} >
             <button className="flex">
                 {icon}
                 <p className='ml-2'>{name}</p>
             </button>
-        </div>
+        </a>
     )
 }
 

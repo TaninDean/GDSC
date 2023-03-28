@@ -6,6 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import SideNavBar from './components/SideNavBar';
+import Activity from './views/Activity';
+import DueSoon from './views/DueSoon';
+import Completed from './views/Completed';
+import Important from './views/Important';
 
 
 const Index: React.FC = () => {
@@ -16,13 +20,21 @@ const Index: React.FC = () => {
   return (
     <React.StrictMode>
       <Navbar setShowNavbar={setNavbar}/>
+      <div className='flex p-3'>
       {showNavbar && <SideNavBar />}
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<App />}></Route>
+          <Route path='/active' element={<Activity/>}></Route>
+          <Route path='/due' element={<DueSoon />}></Route>
+          <Route path='/due' element={<DueSoon />}></Route>
+          <Route path='/completed' element={<Completed />}></Route>
+          <Route path='/important' element={<Important />}></Route>
         </Routes>
       </BrowserRouter>
+      </div>
     </React.StrictMode>
+    
   );
 }
 

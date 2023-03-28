@@ -8,7 +8,7 @@ interface props {
 
 const Navbar = ({setShowNavbar}: props) => {
     return (
-        <div className="h-[5vh] items-center grid grid-cols-[10%,80%,10%] fixed w-full bg-white">
+        <div className="h-[5vh] items-center grid grid-cols-[10%,80%,10%] w-full bg-white">
             <div className='ml-3 flex items-center'>
                 <div className='cursor-pointer' onClick={()=>{setShowNavbar()}}>
                     <ReorderIcon />

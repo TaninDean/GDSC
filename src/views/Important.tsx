@@ -1,7 +1,7 @@
 // todo important activity 
 const Important = () => {
   return (
-    <div>Important</div>
+    <div className="p-3">Important</div>
   )
 }
 

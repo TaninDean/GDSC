@@ -1,7 +1,9 @@
 // todo activity list page
 const Activity = () => {
   return (
-    <div>Activity</div>
+    <div className="p-3">
+      Activity
+    </div>
   )
 }
 
