@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import SideNavBar from './components/SideNavBar';
 import Activity from './views/Activity';
-import DueSoon from './views/DueSoon';
-import Completed from './views/Completed';
 import Important from './views/Important';
+import Completed from './views/Completed';
 
 
 const Index: React.FC = () => {
@@ -17,19 +15,20 @@ const Index: React.FC = () => {
   function setNavbar(){
     setShowNavbar(!showNavbar);
   }
+
   return (
     <React.StrictMode>
       <Navbar setShowNavbar={setNavbar}/>
-      <div className='flex p-3'>
-      {showNavbar && <SideNavBar />}
+      <div className='relative flex p-3 h-[95vh] overflow-hidden'>
+        <div className={`transform transition-all duration-500 ease-out ${showNavbar?'block translate-x-[0%]':'translate-x-[-120%] absolute'}`}>
+          <SideNavBar />
+        </div>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<App />}></Route>
-          <Route path='/active' element={<Activity/>}></Route>
-          <Route path='/due' element={<DueSoon />}></Route>
-          <Route path='/due' element={<DueSoon />}></Route>
-          <Route path='/completed' element={<Completed />}></Route>
+          <Route path='/' element={<Activity />}></Route>
+          <Route path='/active' element={<Activity />}></Route>
           <Route path='/important' element={<Important />}></Route>
+          <Route path='/completed' element={<Completed />} ></Route>
         </Routes>
       </BrowserRouter>
       </div>

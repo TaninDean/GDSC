@@ -1,6 +1,5 @@
 import ReorderIcon from '@mui/icons-material/Reorder';
 import SortIcon from '@mui/icons-material/Sort';
-import SearchIcon from '@mui/icons-material/Search';
 
 interface props {
     setShowNavbar: Function;
@@ -17,14 +16,7 @@ const Navbar = ({setShowNavbar}: props) => {
                     GooDo
                 </div>
             </div>
-            <div className='w-full h-[80%] rounded flex gap-2 bg-[#F8F8F8] items-center p-2'>
-                <div>
-                    <SearchIcon />
-                </div>
-                <div className='w-full '>
-                    <input className='w-full outline-none bg-[#F8F8F8]' type='text' placeholder='Searh Todo' />
-                </div>
-            </div>
+            <div></div>
             <div className="text-right mr-3">
                 <SortIcon />
             </div>
