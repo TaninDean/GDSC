@@ -3,29 +3,52 @@ import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 import { todoModel } from '../models/todo';
-import { useContext, useRef } from 'react';
+import { useContext, useRef, } from 'react';
 import ModificationStoresContext from '../stores/ModificationStores';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { observer } from 'mobx-react';
+import axios from 'axios';
 
 interface props {
   todo: todoModel | undefined
   showDetail: Function
 }
 
-const ActivityDetail = ({ todo, showDetail }: props) => {
+const ActivityDetail = observer(({ todo, showDetail }: props) => {
   const description = useRef(null);
+  const name = useRef(null);
   const modification = useContext(ModificationStoresContext)
 
   function deleteHandler() {
-    // do something
+    try {
+      axios({
+        method: 'post',
+        url: `http://127.0.0.1:8080/todo/delete/${todo!.entityId}`,
+      })
+    } catch {
+      alert(`Error delete Todo !!!.`)
+    }
   }
 
-  function saveHandler() {
-    // do something
-  }
+  function saveHandler(job: string) {
+    const data = {
+      entityId: "0",
+      name: name.current,
+      description: description.current,
+      createdAt: job === "create"?new Date():todo!.createdAt,
+      done: (job === "update" ? todo!.done : job === "create" ? false : true),
+      favorited: false
+    }
 
-  function completed() {
-    // do something
+    try {
+      axios({
+        method: 'post',
+        url: (job === "create" ? "http://127.0.0.1:8080/todo/create" : `http://127.0.0.1:8080/todo/edit/${todo!.entityId}`),
+        data: data
+      })
+    } catch {
+      alert(`Error can't ${job} ${name.current}Todo!!!.`)
+    }
   }
 
   return (
@@ -34,7 +57,7 @@ const ActivityDetail = ({ todo, showDetail }: props) => {
         <CloseIcon style={{ fontSize: 20 }} />
       </div>
       <div className="text-4xl">
-        {modification.open ? "New todo" : todo!.name}
+        <input type="text" className="outline-none bg-[#F4F4F4]" ref={name} defaultValue={modification.open ? "New todo" : todo!.name} />
       </div>
       <hr className="border-2 mt-4 mb-4" />
       <div className='relative '>
@@ -42,29 +65,36 @@ const ActivityDetail = ({ todo, showDetail }: props) => {
         <textarea defaultValue={todo!.description} ref={description} className="outline-none rounded-lg w-full h-[30vh] p-3 mt-3" />
         <div className={`absolute h-[110%] w-full grid ${modification.open ? 'grid-cols-2' : 'grid-cols-3'} p-3 gap-2 items-end justify-center`}>
           {modification.open ?
-            <button className="rounded-md buttom-0 justify-center items-center h-[3rem]">
-              <CancelIcon />
-              <p>Cancel</p>
-            </button> :
             <>
-              <button className="rounded-md buttom-0 justify-center items-center h-[3rem]">
+              <button className="rounded-md buttom-0 justify-center items-center h-[3rem]" onClick={() => { modification.changeOpenState(false) }}>
+                <CancelIcon />
+                <p>Cancel</p>
+              </button>
+              <button className="rounded-md justify-center items-center h-[3rem]" onClick={() => { saveHandler('create') }}>
+                <SaveIcon />
+                <p>save</p>
+              </button>
+            </>
+            :
+            <>
+              <button className="rounded-md buttom-0 justify-center items-center h-[3rem]" onClick={() => { saveHandler('done') }}>
                 <CheckIcon />
                 <p>Completed</p>
               </button>
-              <button className="rounded-md justify-center items-center h-[3rem]">
+              <button className="rounded-md justify-center items-center h-[3rem]" onClick={deleteHandler}>
                 <DeleteIcon />
                 <p>Delete</p>
               </button>
+              <button className="rounded-md justify-center items-center h-[3rem]" onClick={() => { saveHandler('update') }}>
+                <SaveIcon />
+                <p>save</p>
+              </button>
             </>
           }
-          <button className="rounded-md justify-center items-center h-[3rem]">
-            <SaveIcon />
-            <p>save</p>
-          </button>
         </div>
       </div>
     </div>
   )
-}
+})
 
 export default ActivityDetail

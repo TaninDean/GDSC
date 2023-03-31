@@ -10,7 +10,7 @@ const Completed = () => {
     const [data, setData] = useState<todoModel[]>(mockdata);
     const getData = async () => {
         try {
-            const res = await axios.get("replace your url");
+            const res = await axios.get("http://127.0.0.1:8080/todo");
             setData(res.data);
         }
         catch (e) {

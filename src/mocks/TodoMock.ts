@@ -5,7 +5,7 @@ export const mockdata: todoModel[] = [{
     name: 'Name',
     description: 'this is description',
     createdAt: new Date(),
-    done: true,
+    done: false,
     favorited: true
 },{
     entityId: '',

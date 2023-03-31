@@ -22,8 +22,8 @@ const Index: React.FC = () => {
       <Navbar setShowNavbar={setNavbar} />
       <ModificationStoresContext.Provider value={new ModificationStores()}>
         <div className='relative flex p-3 h-[95vh] overflow-hidden'>
-          <div className={`transform transition-all duration-500 ease-out ${showNavbar ? 'block translate-x-[0%]' : 'translate-x-[-120%] absolute'}`}>
-            <SideNavBar />
+          <div className={`transform transition-all duration-500 ease-out`}>
+            <SideNavBar showNavbar={showNavbar}/>
           </div>
           <BrowserRouter>
             <Routes>
