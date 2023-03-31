@@ -1,32 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ActivityList from "../components/ActivityList";
+import { mockdata } from "../mocks/TodoMock";
 import { todoModel } from "../models/todo"
-
-const mockdata: todoModel[] = [{
-    entityId: '',
-    name: 'Name',
-    description: 'this is description',
-    createdAt: new Date(),
-    done: true,
-    favorited: true
-},{
-    entityId: '',
-    name: 'Name',
-    description: 'this is description',
-    createdAt: new Date(),
-    done: true,
-    favorited: true
-},
-{
-    entityId: '',
-    name: 'Name',
-    description: 'this is description',
-    createdAt: new Date(),
-    done: true,
-    favorited: true
-}
-]
 
 const Activity = () => {
     const [data, setData] = useState<todoModel[]>(mockdata);
