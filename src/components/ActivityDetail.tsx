@@ -3,12 +3,13 @@ import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 import { todoModel } from '../models/todo';
-import { useContext, useRef, } from 'react';
+import { useContext, useRef, useState, } from 'react';
 import ModificationStoresContext from '../stores/ModificationStores';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { observer } from 'mobx-react';
 import axios from 'axios';
-
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 interface props {
   todo: todoModel | undefined
   showDetail: Function
@@ -18,6 +19,7 @@ const ActivityDetail = observer(({ todo, showDetail }: props) => {
   const description = useRef(null);
   const name = useRef(null);
   const modification = useContext(ModificationStoresContext)
+  const [filled, setFilled] = useState<boolean>(todo!.favorited)
 
   function deleteHandler() {
     try {
@@ -35,9 +37,9 @@ const ActivityDetail = observer(({ todo, showDetail }: props) => {
       entityId: "0",
       name: name.current,
       description: description.current,
-      createdAt: job === "create"?new Date():todo!.createdAt,
+      createdAt: job === "create" ? new Date() : todo!.createdAt,
       done: (job === "update" ? todo!.done : job === "create" ? false : true),
-      favorited: false
+      favorited: filled
     }
 
     try {
@@ -56,8 +58,13 @@ const ActivityDetail = observer(({ todo, showDetail }: props) => {
       <div className='absolute top-1 right-1 cursor-pointer' onClick={() => { showDetail() }}>
         <CloseIcon style={{ fontSize: 20 }} />
       </div>
-      <div className="text-4xl">
-        <input type="text" className="outline-none bg-[#F4F4F4]" ref={name} defaultValue={modification.open ? "New todo" : todo!.name} />
+      <div className="text-4xl w-full grid grid-cols-[80%,20%]">
+        <div>
+          <input type="text" className="outline-none bg-[#F4F4F4]" ref={name} defaultValue={modification.open ? "New todo" : todo!.name} />
+        </div>
+        <div className='flex items-center justify-center mt-[0.05rem]' onClick={() => { setFilled(preFill => !preFill);}}>
+          {filled ? <StarIcon style={{ fill: '#F9BB07' }} /> : <StarBorderIcon />}
+        </div>
       </div>
       <hr className="border-2 mt-4 mb-4" />
       <div className='relative '>
