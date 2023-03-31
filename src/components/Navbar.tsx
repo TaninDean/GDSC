@@ -9,8 +9,8 @@ const Navbar = ({ setShowNavbar }: props) => {
     return (
         <div className="h-[5vh] items-center grid grid-cols-[10%,80%,10%] w-full bg-white font-poppins text-[#515153]">
             <div className='ml-3 flex items-center'>
-                <div className='cursor-pointer' onClick={() => { setShowNavbar() }}>
-                    <ReorderIcon />
+                <div className='flex cursor-pointer items-center' onClick={() => { setShowNavbar() }}>
+                   <img src='/list.jpg' width='30vh'/>
                 </div>
                 <div className='ml-1 cursor-pointer flex h-full items-center justify-center'>
                     <img src={'/logo.jpg'} className="h-[5vh]" alt='logo'/>
