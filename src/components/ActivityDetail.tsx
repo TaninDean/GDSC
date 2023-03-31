@@ -58,7 +58,7 @@ const ActivityDetail = observer(({ todo, showDetail }: props) => {
       <div className='absolute top-1 right-1 cursor-pointer' onClick={() => { showDetail() }}>
         <CloseIcon style={{ fontSize: 20 }} />
       </div>
-      <div className="text-4xl w-full grid grid-cols-[80%,20%]">
+      <div className="text-4xl w-full grid grid-cols-[80%,20%] mt-4">
         <div>
           <input type="text" className="outline-none bg-[#F4F4F4]" ref={name} defaultValue={modification.open ? "New todo" : todo!.name} />
         </div>

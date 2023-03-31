@@ -35,9 +35,9 @@ const Task = ({ todo, showDetail, taskDetailSet }: props) => {
     }
     const [filled, setFilled] = useState<boolean>(todo!.favorited)
     return (
-        <div className="grid grid-cols-[2%,5%,88%,5%] border-2 rounded-lg p-3 m-2">
-            <div className='flex items-center ml-1'><input type="checkbox" defaultChecked={todo!.done} onChange={() => {clickHandler('done')}}/></div>
-            <div className='flex item-center justify-center mt-[0.05rem]' onClick={() => { setFilled(preFill => !preFill); clickHandler('fav')}}>
+        <div className="grid grid-cols-[1.75rem,1.31rem,88%,5%] border-2 rounded-lg p-3 m-2 gap-2">
+            <div className='flex items-center ml-1'><input type="checkbox" defaultChecked={todo!.done} onChange={() => { clickHandler('done') }} /></div>
+            <div className='flex item-center justify-center mt-[0.05rem]' onClick={() => { setFilled(preFill => !preFill); clickHandler('fav') }}>
                 {filled ? <StarIcon style={{ fill: '#F9BB07' }} /> : <StarBorderIcon />}
             </div>
             <div className="ml-3 flex items-center">{todo!.name}</div>

@@ -21,7 +21,7 @@ const Index: React.FC = () => {
     <React.StrictMode>
       <Navbar setShowNavbar={setNavbar} />
       <ModificationStoresContext.Provider value={new ModificationStores()}>
-        <div className='relative flex p-3 h-[95vh] overflow-hidden'>
+        <div className='relative flex p-3 h-[95vh] overflow-hidden font-poppins text-[#515153]'>
           <div className={`transform transition-all duration-500 ease-out`}>
             <SideNavBar showNavbar={showNavbar}/>
           </div>
